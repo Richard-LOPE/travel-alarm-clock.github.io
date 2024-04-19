@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAVEL ALARM CLOCK</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      div {
+        display: flex;
+      }
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      .padding {
+        position: absolute;
+        color: #fff;
+        font-size: 60px;
+        font-weight: 800;
+        top: 42%;
+        text-align: center;
+      }
+      .padding-bottom {
+        position: absolute;
+        top: 53%;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      .time-temp {
+        margin: 0 20px;
+        transform: translateY(-10px);
+      }
+      .time-ltemp {
+        margin: 0 10px;
+        transform: translateY(-5px);
+      }
+      .text0 {
+        background: linear-gradient(-210deg, #a2facf 0%, #64acff 100%);
+        background-clip: text;
+        letter-spacing: -0.03em;
+        display: block;
+        align-items: center;
+      }
+    </style>
+    <style>
+      #nav {
+        position: relative;
+        border: none;
+        border-radius: 10em;
+        display: flex;
+        list-style: none;
+        background: #f5f5f5;
+        box-shadow: 10px 20px 20px #00000033;
+        padding: 10px;
+      }
+
+      #nav li a {
+        position: relative;
+        padding: 7.5px 25px;
+        font: 800 12px "优设标题黑";
+        border: none;
+        outline: none;
+        color: #2e2733;
+        display: inline-block;
+        text-decoration: none;
+        z-index: 3;
+      }
+
+      .slide1,
+      .slide2 {
+        position: absolute;
+        display: inline-block;
+        height: 30px;
+        border-radius: 10em;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1.05);
+      }
+
+      .slide1 {
+        background-color: #ff8053;
+        z-index: 2;
+      }
+
+      .slide2 {
+        opacity: 0;
+        background-color: #ea5751;
+        z-index: 1;
+        box-shadow: 0 0 10px #ffffffaa inset;
+      }
+
+      .squeeze {
+        transform: scale(0.9);
+      }
+    </style>
+    <style>
+      .loading {
+        position: fixed;
+        flex-direction: column;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #f7f7f7;
+        z-index: 100000000;
+        transition: 1s ease;
+      }
+
+      .loading svg {
+        width: 5rem;
+        margin-bottom: 2rem;
+        overflow: visible;
+        transition: 0.3s ease;
+      }
+
+      .loading svg circle {
+        fill: none;
+        stroke: #171717;
+        stroke-dasharray: 160;
+        stroke-dashoffset: 160;
+        transform-origin: center;
+        animation: circle_rotate 3s ease-in infinite;
+      }
+
+      @keyframes circle_rotate {
+        0% {
+          transform: rotate(0deg);
+          stroke-dashoffset: 160;
+        }
+
+        100% {
+          transform: rotate(360deg);
+          stroke-dashoffset: -160;
+        }
+      }
+
+      .loading p {
+        font-family: sans-serif;
+        font-size: 2rem;
+        color: #171717;
+        font-weight: 900;
+        transition: 0.3s ease;
+      }
+
+      .loading_out {
+        transform: translateY(100%);
+      }
+
+      .loading_out svg,
+      .loading_out p {
+        opacity: 0;
+      }
+    </style>
+    <div style="z-index: 999999">
+      <link rel="stylesheet" href="./css/style1.css" />
+      <body>
+        <h2 class="text">Richard-lope-DESIGN-</h2>
+        <script src="./js/script1.js"></script>
+      </body>
+    </div>
+
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        margin-top: 70px;
+        background: #2e2733;
+        overflow: hidden;
+        font-size: 62.5%;
+      }
+
+      /* The @property CSS at-rule is part of the CSS Houdini umbrella of APIs. It */
+      @property --angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+      }
+
+      .spiral {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: absolute;
+        color: #ffffff;
+        font-family: "sans-serif";
+      }
+
+      @keyframes spiral {
+        0% {
+          --angle: 0deg;
+        }
+        100% {
+          --angle: 360deg;
+        }
+      }
+
+      .character {
+        font-size: 2.8rem;
+
+        background: linear-gradient(
+          to right,
+          #ff8053,
+          #ea5751
+        ); /*设置渐变的方向从左到右 颜色从ff0000到ffff00*/
+        background-clip: text; /*将设置的背景颜色限制在文字中*/
+        -webkit-text-fill-color: transparent; /*给文字设置成透明*/
+
+        text-transform: uppercase;
+        transform: translateY(calc(sin(var(--angle)) * 100px))
+          scale(calc(cos(var(--angle)) * 0.5 + 0.5));
+        animation: spiral 4s linear infinite;
+      }
+
+      @media (max-width: 490px) {
+        .character {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+    <style>
+      .button {
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        text-decoration: none;
+        font-family: sans-serif;
+        font-weight: 600;
+        font-size: 4em;
+        padding: 0.75em 1em;
+        color: #ffffff16;
+
+        border: 0.1em solid #ffffff;
+        border-radius: 2em;
+        transition: 4s;
+        height: 25px;
+        width: 220px;
+        top: 50%;
+      }
+
+      .button:before,
+      .button:after {
+        content: "";
+        position: absolute;
+        top: -1.5em;
+        z-index: -1;
+        width: 400%;
+        aspect-ratio: 1;
+        border: none;
+        border-radius: 40%;
+        background-color: rgba(249, 249, 249, 0.25);
+        transition: 4s;
+      }
+
+      .button:before {
+        left: -80%;
+        transform: translate3d(0, 5em, 0) rotate(-340deg);
+      }
+
+      .button:after {
+        right: -80%;
+        transform: translate3d(0, 5em, 0) rotate(390deg);
+      }
+
+      .button:hover,
+      .button:focus {
+        color: white;
+      }
+
+      .button:hover:before,
+      .button:hover:after,
+      .button:focus:before,
+      .button:focus:after {
+        transform: none;
+        background-color: rgba(154, 154, 160, 0.75);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="spiral" class="spiral"></div>
+    <div id="spiral2" class="spiral"></div>
+    <!--dongxiao-->
+    <a
+      style="text-align: center"
+      href="C:\Users\LOPE\Desktop\旅行闹钟\2.html"
+      class="button"
+      >START</a
+    >
+    <!--kaishi-->
+    <div class="padding">
+      <div id="time-hour" class="text0">00</div>
+      <div class="time-temp">:</div>
+      <div id="time-minutes" class="text0">00</div>
+      <div class="time-temp">:</div>
+      <div id="time-second" class="text0">00</div>
+    </div>
+    <div class="padding-bottom">
+      <div id="time-year" class="text0">00</div>
+      <div class="time-ltemp">-</div>
+      <div id="time-mouth" class="text0">00</div>
+      <div class="time-ltemp">-</div>
+      <div id="time-day" class="text0">00</div>
+    </div>
+    <script>
+      function time() {
+        var time = new Date();
+        var hour;
+        var minutes;
+        var seconds;
+        var year;
+        var mouth;
+        var day;
+        year = time.getFullYear();
+        mouth = time.getMonth();
+        day = time.getDate();
+        document.getElementById("time-year").innerHTML = year;
+        document.getElementById("time-mouth").innerHTML = mouth + 1;
+        document.getElementById("time-day").innerHTML = day;
+        var temph = time.getHours();
+        if (temph <= 9 && temph > 0) {
+          hour = "0" + temph;
+        } else {
+          hour = temph;
+        }
+        var tempm = time.getMinutes();
+        if (tempm <= 10 && tempm >= 0) {
+          minutes = "0" + tempm;
+        } else {
+          minutes = tempm;
+        }
+        var temps = time.getSeconds();
+        if (temps < 10 && temps >= 0) {
+          seconds = "0" + temps;
+        } else {
+          seconds = temps;
+        }
+        document.getElementById("time-hour").innerHTML = hour;
+        document.getElementById("time-minutes").innerHTML = minutes;
+        document.getElementById("time-second").innerHTML = seconds;
+      }
+      window.setInterval("time()", 1000);
+    </script>
+  </body>
+  <body>
+    <div class="loading">
+      <svg viewbox="0 0 50 50"></svg>
+    </div>
+  </body>
+</html>
+<script>
+  let isFirefox = typeof InstallTrigger !== "undefined";
+  const words = "travel alarm clock";
+
+  let ANGLE = 360;
+  const ANIMATION_DURATION = 4000;
+
+  const animation = () => {
+    ANGLE -= 1; // Incremento do ângulo
+    document.querySelectorAll(".spiral *").forEach((el, i) => {
+      const translateY = Math.sin(ANGLE * (Math.PI / 120)) * 100;
+      const scale = Math.cos(ANGLE * (Math.PI / 120)) * 0.5 + 0.5;
+
+      const offset = parseInt(el.dataset.offset);
+      const delay = i * (ANIMATION_DURATION / 16) - offset;
+
+      setTimeout(() => {
+        el.style.transform = `translateY(${translateY}px) scale(${scale})`;
+      }, delay);
+    });
+
+    requestAnimationFrame(animation);
+  };
+
+  const characters = words.split("").forEach((char, i) => {
+    const createElement = (offset) => {
+      const div = document.createElement("div");
+      div.innerText = char;
+      div.classList.add("character");
+      div.setAttribute("data-offset", offset);
+      div.style.animationDelay = `-${i * (ANIMATION_DURATION / 16) - offset}ms`;
+      return div;
+    };
+
+    document.querySelector("#spiral").append(createElement(0));
+    document
+      .querySelector("#spiral2")
+      .append(createElement((isFirefox ? 1 : -1) * (ANIMATION_DURATION / 2)));
+  });
+
+  // @property CSS doesn't work in Firefox, so it must be animated using JavaScript.
+  if (isFirefox) {
+    animation();
+  }
+</script>
+<script>
+  const loading = {
+    container: document.querySelector(".loading"),
+    in(target) {
+      this.container.classList.remove("loading_out");
+      setTimeout(() => {
+        window.location.href = target;
+      }, 1000);
+    },
+    out() {
+      this.container.classList.add("loading_out");
+    },
+  };
+  window.addEventListener("load", () => {
+    loading.out();
+  });
+</script>
